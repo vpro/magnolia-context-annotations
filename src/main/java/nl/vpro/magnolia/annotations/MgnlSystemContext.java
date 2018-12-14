@@ -7,9 +7,9 @@ import java.lang.annotation.Target;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 1.0
  */
-@Target({ElementType.METHOD})
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MgnlSystemContext {
 

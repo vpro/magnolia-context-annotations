@@ -11,10 +11,10 @@ import javax.inject.Inject;
  * @since 1.0
  */
 @Slf4j
-public class SystemContextAnnotationsModule implements ModuleLifecycle {
+public class ContextAnnotationsModule implements ModuleLifecycle {
 
     @Inject
-    public SystemContextAnnotationsModule() {
+    public ContextAnnotationsModule() {
 
     }
 

@@ -1,9 +1,11 @@
 package nl.vpro.magnolia.annotations;
 
+import info.magnolia.context.ContextFactory;
 import info.magnolia.context.SystemContext;
 import info.magnolia.objectfactory.Components;
 import info.magnolia.test.mock.MockComponentProvider;
 import info.magnolia.test.mock.MockContext;
+import lombok.extern.slf4j.Slf4j;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,20 +16,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 1.0
  */
+@Slf4j
 public class AnnotationsTest {
 
 
     public static class A {
         @MgnlSystemContext
         public String stuff() {
+            log.info("{}", ContextFactory.getInstance().getSystemContext());
+
             return "aa";
         }
     }
 
+    @MgnlSystemContext
+    public static class B {
+        public String stuff() {
+            log.info("{}", ContextFactory.getInstance().getSystemContext());
+            return "bb";
+        }
+    }
+
     Injector injector;
-    A instance;
+    A a;
+    B b;
     SystemContext systemContext = new MockContext();
 
     @Before
@@ -37,14 +51,20 @@ public class AnnotationsTest {
         mocks.setInstance(SystemContext.class, systemContext);
 
         injector = Guice.createInjector(new ContextAnnotations());
-        instance = injector.getInstance(A.class);
+        a = injector.getInstance(A.class);
+        b = injector.getInstance(B.class);
 
 
 
     }
 
     @Test
-    public void test() {
-        assertThat(instance.stuff()).isEqualTo("aa");
+    public void testa() {
+        assertThat(a.stuff()).isEqualTo("aa");
+    }
+
+     @Test
+    public void testb() {
+        assertThat(b.stuff()).isEqualTo("bb");
     }
 }

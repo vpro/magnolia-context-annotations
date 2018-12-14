@@ -3,7 +3,7 @@
 
   <groupId>nl.vpro</groupId>
   <artifactId>magnolia-context-annotations</artifactId>
-  <name>JSR107-Magnolia</name>
+  <name>magnolia-context-annotations</name>
   <version>1.0-SNAPSHOT</version>
   <inceptionYear>2018</inceptionYear>
   <description>Provided annotations (guice interpreted) to do things in magnolia system context</description>
