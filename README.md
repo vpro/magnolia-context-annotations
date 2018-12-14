@@ -27,7 +27,7 @@ can do in stead of
 
 It's a bit like `javax.transaction.Transactional`
 
-The annotation can also be used at class level.
+The annotation can also be used at class level, so you can make quite easily mark a complete utility class to be executed in system context.
 
 
 ## Installation
