@@ -14,6 +14,11 @@ import java.lang.annotation.Target;
 public @interface MgnlSystemContext {
 
 
-    boolean requiresNew = false;
+    /**
+     * Whether the system context must be release after execution.
+     *
+     * A system context cannot really be released, but if this is true, the thread locals will be in the same state afterwards.
+     */
+    boolean releaseAfterExecution = true;
 
 }

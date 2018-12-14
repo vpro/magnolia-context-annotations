@@ -27,6 +27,8 @@ can do in stead of
 
 It's a bit like `javax.transaction.Transactional`
 
+The annotation can also be used at class level.
+
 
 ## Installation
 

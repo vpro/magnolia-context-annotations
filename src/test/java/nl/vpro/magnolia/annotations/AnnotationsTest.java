@@ -54,8 +54,6 @@ public class AnnotationsTest {
         a = injector.getInstance(A.class);
         b = injector.getInstance(B.class);
 
-
-
     }
 
     @Test

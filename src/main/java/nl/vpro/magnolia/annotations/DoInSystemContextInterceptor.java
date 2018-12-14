@@ -20,16 +20,13 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
         if (annotation == null) {
             annotation = invocation.getMethod().getDeclaringClass().getAnnotation(MgnlSystemContext.class);
         }
+        boolean releaseAfterExecution = true;
         if (annotation == null) {
             log.warn("Annotation not found on {}", invocation);
+        } else {
+            releaseAfterExecution = annotation.releaseAfterExecution;
         }
-        return MgnlContext.doInSystemContext(new MgnlContext.Op<Object, Throwable>() {
-            @Override
-            public Object exec() throws Throwable {
-                return invocation.proceed();
-
-            }
-        });
+        return MgnlContext.doInSystemContext(invocation::proceed, releaseAfterExecution);
 
 
     }
