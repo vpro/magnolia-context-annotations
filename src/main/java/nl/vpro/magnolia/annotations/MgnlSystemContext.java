@@ -1,11 +1,15 @@
 package nl.vpro.magnolia.annotations;
 
+import info.magnolia.context.MgnlContext;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * A method annotated with this will implicetely be executed in the Magnolia 'system context'. See {@link MgnlContext#doInSystemContext}
+ *
  * @author Michiel Meeuwissen
  * @since 1.0
  */
