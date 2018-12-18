@@ -19,6 +19,15 @@ public @interface MgnlSystemContext {
      *
      * A system context cannot really be released, but if this is true, the thread locals will be in the same state afterwards.
      */
-    boolean releaseAfterExecution = true;
+    boolean releaseAfterExecution() default true;
 
+
+    /**
+     * There is much code that actually required a _web context_.
+     *
+     * See e.g. https://jira.magnolia-cms.com/browse/MGNLIMG-176
+     *
+     * This is experimental
+     */
+    String site() default "";
 }
