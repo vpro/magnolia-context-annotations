@@ -30,11 +30,12 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
         boolean releaseAfterExecution = true;
         String site = "";
         if (annotation == null) {
-            log.warn("Annotation not found on {}", invocation);
+            log.warn("Annotation not found on {}", invocation.getMethod());
         } else {
             releaseAfterExecution = annotation.releaseAfterExecution();
             site = annotation.site();
         }
+        releaseAfterExecution &= ! MgnlContext.isSystemInstance();
         if (StringUtils.isNotBlank(site)) {
             Site siteObject = Components.getComponent(SiteManager.class).getSite(site);
             if (siteObject == null) {

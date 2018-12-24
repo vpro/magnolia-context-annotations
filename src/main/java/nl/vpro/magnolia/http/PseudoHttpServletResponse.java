@@ -61,8 +61,9 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     }
 
     @Override
+    @Deprecated
     public String encodeRedirectUrl(String url) {
-        return null;
+        return url;
 
     }
 
@@ -126,6 +127,7 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     }
 
     @Override
+    @Deprecated
     public void setStatus(int sc, String sm) {
 
 
