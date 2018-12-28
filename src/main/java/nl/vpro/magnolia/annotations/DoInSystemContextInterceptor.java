@@ -7,6 +7,9 @@ import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.StringUtils;
@@ -20,9 +23,11 @@ import nl.vpro.magnolia.SystemWebContext;
 @Slf4j
 public class DoInSystemContextInterceptor implements MethodInterceptor {
 
+
+    static ThreadLocal<AtomicInteger> THREAD_COUNT = ThreadLocal.withInitial(() -> new AtomicInteger(0));
+
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
-
         MgnlSystemContext annotation = invocation.getMethod().getAnnotation(MgnlSystemContext.class);
         if (annotation == null) {
             annotation = invocation.getMethod().getDeclaringClass().getAnnotation(MgnlSystemContext.class);
@@ -35,24 +40,54 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
             releaseAfterExecution = annotation.releaseAfterExecution();
             site = annotation.site();
         }
-        releaseAfterExecution &= ! MgnlContext.isSystemInstance();
-        if (StringUtils.isNotBlank(site)) {
-            Site siteObject = Components.getComponent(SiteManager.class).getSite(site);
-            if (siteObject == null) {
-                throw new IllegalArgumentException("No such site " + site);
-            }
-            Context before = MgnlContext.hasInstance() ? MgnlContext.getInstance() : null;
 
-            try {
-                MgnlContext.setInstance(new SystemWebContext(siteObject));
-                return invocation.proceed();
-            } finally {
-                MgnlContext.setInstance(before);
+        AtomicInteger count = THREAD_COUNT.get();
+        count.incrementAndGet();
+        try {
+            if (StringUtils.isNotBlank(site)) {
+                return doInWebContext(site, invocation);
+            } else {
+                return MgnlContext.doInSystemContext(invocation::proceed, false);
             }
+        } finally {
+            int newCount = count.decrementAndGet();
+            if (newCount == 0) {
+                if (releaseAfterExecution) {
+                    MgnlContext.release();
 
-        } else {
-            return MgnlContext.doInSystemContext(invocation::proceed, releaseAfterExecution);
+                }
+            }
         }
 
     }
+
+     public static <V> V doInWebContext(String site, Callable<V> callable) throws Exception {
+         Site siteObject = Components.getComponent(SiteManager.class).getSite(site);
+        if (siteObject == null) {
+            throw new IllegalArgumentException("No such site " + site);
+        }
+        Context before = MgnlContext.hasInstance() ? MgnlContext.getInstance() : null;
+
+        try {
+            MgnlContext.setInstance(new SystemWebContext(siteObject));
+            return callable.call();
+        } finally {
+            MgnlContext.setInstance(before);
+        }
+    }
+
+    protected static Object doInWebContext(String site, MethodInvocation invocation) throws Exception {
+        return doInWebContext(site, () -> {
+            try {
+                return invocation.proceed();
+            } catch (Exception e) {
+                throw e;
+            } catch (Throwable t) {
+                throw new RuntimeException(t);
+            }
+        });
+    }
+
+
+
 }
