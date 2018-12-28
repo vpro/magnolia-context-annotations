@@ -12,10 +12,13 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.annotations.Beta;
+
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 1.1
  */
+@Beta
 public class PseudoHttpServletResponse implements HttpServletResponse {
 
     private final Supplier<Site> site;

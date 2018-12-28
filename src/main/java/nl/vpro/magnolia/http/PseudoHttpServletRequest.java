@@ -15,10 +15,13 @@ import java.util.function.Supplier;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.google.common.annotations.Beta;
+
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 1.1
  */
+@Beta
 public class PseudoHttpServletRequest implements HttpServletRequest {
 
     private final Supplier<Site> site;

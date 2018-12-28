@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import com.google.common.annotations.Beta;
+
 import nl.vpro.magnolia.http.PseudoHttpServletRequest;
 import nl.vpro.magnolia.http.PseudoHttpServletResponse;
 
@@ -27,6 +29,7 @@ import nl.vpro.magnolia.http.PseudoHttpServletResponse;
  * @author Michiel Meeuwissen
  * @since 1.1
  */
+@Beta
 public class SystemWebContext  extends JCRSessionPerThreadSystemContext implements WebContext, SystemContext {
 
     private PageContext pageContext = null;
