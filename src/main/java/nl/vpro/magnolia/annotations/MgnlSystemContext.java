@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.common.annotations.Beta;
+
 /**
  * @author Michiel Meeuwissen
  * @since 1.0
@@ -29,5 +31,6 @@ public @interface MgnlSystemContext {
      *
      * This is experimental
      */
+    @Beta
     String site() default "";
 }

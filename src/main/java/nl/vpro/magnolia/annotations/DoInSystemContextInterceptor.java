@@ -14,6 +14,8 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.annotations.Beta;
+
 import nl.vpro.magnolia.SystemWebContext;
 
 /**
@@ -61,7 +63,8 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
 
     }
 
-     public static <V> V doInWebContext(String site, Callable<V> callable) throws Exception {
+    @Beta
+    public static <V> V doInWebContext(String site, Callable<V> callable) throws Exception {
          Site siteObject = Components.getComponent(SiteManager.class).getSite(site);
         if (siteObject == null) {
             throw new IllegalArgumentException("No such site " + site);
