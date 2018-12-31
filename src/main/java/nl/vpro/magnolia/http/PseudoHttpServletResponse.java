@@ -5,6 +5,7 @@ import info.magnolia.module.site.Site;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.function.Supplier;
 
@@ -35,7 +36,7 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
 
     @Override
     public void addCookie(Cookie cookie) {
-
+        throw new UnsupportedOperationException();
 
     }
 
@@ -47,98 +48,88 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
 
     @Override
     public String encodeURL(String url) {
-        return null;
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
     public String encodeRedirectURL(String url) {
-        return null;
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
+    @Deprecated
     public String encodeUrl(String url) {
-        return null;
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     @Deprecated
     public String encodeRedirectUrl(String url) {
-        return url;
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public void sendError(int sc, String msg) throws IOException {
-
-
+    public void sendError(int sc, String msg) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void sendError(int sc) throws IOException {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void sendRedirect(String location) throws IOException {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setDateHeader(String name, long date) {
-
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
     public void addDateHeader(String name, long date) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setHeader(String name, String value) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void addHeader(String name, String value) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setIntHeader(String name, int value) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void addIntHeader(String name, int value) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setStatus(int sc) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     @Deprecated
     public void setStatus(int sc, String sm) {
-
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
     public int getStatus() {
-        return 0;
+        return 200;
 
     }
 
@@ -150,19 +141,18 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
 
     @Override
     public Collection<String> getHeaders(String name) {
-        return null;
+        return Collections.emptyList();
 
     }
 
     @Override
     public Collection<String> getHeaderNames() {
-        return null;
-
+        return Collections.emptyList();
     }
 
     @Override
     public String getCharacterEncoding() {
-        return null;
+        return "UTF-8";
 
     }
 
@@ -174,44 +164,39 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
 
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
-        return null;
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
     public PrintWriter getWriter() throws IOException {
-        return null;
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
     public void setCharacterEncoding(String charset) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setContentLength(int len) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setContentLengthLong(long len) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setContentType(String type) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void setBufferSize(int size) {
-
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
