@@ -1,21 +1,20 @@
 package nl.vpro.magnolia.annotations;
 
+import com.google.common.annotations.Beta;
 import info.magnolia.context.Context;
 import info.magnolia.context.MgnlContext;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.atomic.AtomicInteger;
-
+import nl.vpro.magnolia.SystemWebContext;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.StringUtils;
-import com.google.common.annotations.Beta;
 
-import nl.vpro.magnolia.SystemWebContext;
+import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Michiel Meeuwissen
@@ -63,7 +62,7 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
             int newCount = state.count.decrementAndGet();
             if (newCount == 0) {
                 if (releaseAfterExecution) {
-                    state.context.release();
+                    state.release();
                 }
             }
         }
@@ -99,10 +98,20 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
         });
     }
 
-
+    @Getter
     static class State {
         Context originalContext;
         Context context;
         AtomicInteger count = new AtomicInteger(0);;
+        protected void release() {
+
+            if (context != null) {
+                try {
+                    context.release();
+                } catch (Throwable t) {
+                    log.error("While releasing {}: {}", context, t.getMessage(), t);
+                }
+            }
+        }
     }
 }
