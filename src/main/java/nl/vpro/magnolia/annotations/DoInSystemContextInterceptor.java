@@ -2,6 +2,7 @@ package nl.vpro.magnolia.annotations;
 
 import info.magnolia.context.Context;
 import info.magnolia.context.MgnlContext;
+import info.magnolia.context.SystemContext;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
@@ -26,7 +27,7 @@ import nl.vpro.magnolia.SystemWebContext;
 public class DoInSystemContextInterceptor implements MethodInterceptor {
 
 
-    static ThreadLocal<AtomicInteger> THREAD_COUNT = ThreadLocal.withInitial(() -> new AtomicInteger(0));
+    static ThreadLocal<State> THREAD_STATE = ThreadLocal.withInitial(State::new);
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -43,8 +44,14 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
             site = annotation.site();
         }
 
-        AtomicInteger count = THREAD_COUNT.get();
-        count.incrementAndGet();
+        State state = THREAD_STATE.get();
+
+
+        if (state.count.get() == 0) {
+            state.originalContext = MgnlContext.hasInstance() ? MgnlContext.getInstance() : null;
+
+        }
+        state.count.incrementAndGet();
         try {
             if (StringUtils.isNotBlank(site)) {
                 return doInWebContext(site, invocation);
@@ -52,10 +59,15 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
                 return MgnlContext.doInSystemContext(invocation::proceed, false);
             }
         } finally {
-            int newCount = count.decrementAndGet();
+            int newCount = state.count.decrementAndGet();
             if (newCount == 0) {
                 if (releaseAfterExecution) {
-                    MgnlContext.release();
+
+                    if (state.originalContext instanceof SystemContext) {
+                        log.info("Not releasing since original context was system context");
+                    } else {
+                        MgnlContext.release();
+                    }
 
                 }
             }
@@ -65,7 +77,7 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
 
     @Beta
     public static <V> V doInWebContext(String site, Callable<V> callable) throws Exception {
-         Site siteObject = Components.getComponent(SiteManager.class).getSite(site);
+        Site siteObject = Components.getComponent(SiteManager.class).getSite(site);
         if (siteObject == null) {
             throw new IllegalArgumentException("No such site " + site);
         }
@@ -92,5 +104,8 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
     }
 
 
-
+    static class State {
+        Context originalContext;
+        AtomicInteger count = new AtomicInteger(0);;
+    }
 }
