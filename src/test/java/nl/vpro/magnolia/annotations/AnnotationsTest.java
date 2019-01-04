@@ -43,7 +43,7 @@ public class AnnotationsTest {
         }
     }
 
-    @MgnlSystemContext(site = "vpronl")
+    @MgnlSystemContext(site = "vpronl", releaseAfterExecution = false)
     public static class C {
         public String stuff() {
             log.info("{}", ContextFactory.getInstance().getSystemContext());
