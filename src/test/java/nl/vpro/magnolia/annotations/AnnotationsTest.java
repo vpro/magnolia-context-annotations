@@ -1,6 +1,7 @@
 package nl.vpro.magnolia.annotations;
 
 import info.magnolia.context.ContextFactory;
+import info.magnolia.context.MgnlContext;
 import info.magnolia.context.SystemContext;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
@@ -43,10 +44,11 @@ public class AnnotationsTest {
         }
     }
 
-    @MgnlSystemContext(site = "vpronl", releaseAfterExecution = false)
+    @MgnlWebContext(site = "vpronl", releaseAfterExecution = false)
     public static class C {
         public String stuff() {
             log.info("{}", ContextFactory.getInstance().getSystemContext());
+            log.info("Path: {}", MgnlContext.getWebContext().getContextPath());
             return "cc";
         }
     }

@@ -5,13 +5,22 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.google.common.annotations.Beta;
+
 /**
+ *  There is much code that actually required a _web context_.
+ *
+ *  See e.g. https://jira.magnolia-cms.com/browse/MGNLIMG-176
+ *
+ *  This is experimental
+ *
  * @author Michiel Meeuwissen
- * @since 1.0
+ * @since 1.1
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MgnlSystemContext {
+@Beta
+public @interface MgnlWebContext {
 
 
     /**
@@ -21,4 +30,10 @@ public @interface MgnlSystemContext {
      */
     boolean releaseAfterExecution() default true;
 
+
+    /**
+     *
+     */
+    @Beta
+    String site() default "";
 }

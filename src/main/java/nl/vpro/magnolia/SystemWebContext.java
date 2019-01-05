@@ -3,7 +3,6 @@ package nl.vpro.magnolia;
 import info.magnolia.cms.beans.runtime.MultipartForm;
 import info.magnolia.cms.core.AggregationState;
 import info.magnolia.context.JCRSessionPerThreadSystemContext;
-import info.magnolia.context.SystemContext;
 import info.magnolia.context.WebContext;
 import info.magnolia.module.site.ExtendedAggregationState;
 import info.magnolia.module.site.Site;
@@ -30,7 +29,7 @@ import nl.vpro.magnolia.http.PseudoHttpServletResponse;
  * @since 1.1
  */
 @Beta
-public class SystemWebContext  extends JCRSessionPerThreadSystemContext implements WebContext, SystemContext {
+public class SystemWebContext  extends JCRSessionPerThreadSystemContext implements WebContext {
 
     private PageContext pageContext = null;
     private final HttpServletRequest servletRequest;
