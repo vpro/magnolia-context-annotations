@@ -4,7 +4,6 @@
 # magnolia-context-annotations
 Provides java annotation for executing in system context
 
-
 ## Usage
 After installing this module in your magnolia deployment (taking the maven dependency is enough), you 
 can do in stead of 
