@@ -4,7 +4,7 @@
   <groupId>nl.vpro</groupId>
   <artifactId>magnolia-context-annotations</artifactId>
   <name>magnolia-context-annotations</name>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1.0</version>
   <inceptionYear>2018</inceptionYear>
   <description>Provided annotations (guice interpreted) to do things in magnolia system context</description>
   <url>https://github.com/vpro/magnolia-context-annotations</url>
@@ -36,7 +36,7 @@
     <connection>scm:git:git://git@github.com/vpro/magnolia-context-annotations.git</connection>
     <developerConnection>scm:git:git@github.com:vpro/magnolia-context-annotations.git</developerConnection>
     <url>https://github.com/vpro/magnolia-context-annotations</url>
-    <tag>1.1-SNAPSHOT</tag>
+    <tag>1.1.0</tag>
   </scm>
 
   <properties>
