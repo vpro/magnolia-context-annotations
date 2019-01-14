@@ -22,7 +22,7 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
         if (annotation == null) {
             annotation = invocation.getMethod().getDeclaringClass().getAnnotation(MgnlSystemContext.class);
         }
-        boolean releaseAfterExecution = true;
+        ReleaseAfterExecution releaseAfterExecution = ReleaseAfterExecution.SMART;
         if (annotation == null) {
             log.warn("Annotation not found on {}", invocation.getMethod());
         } else {
@@ -37,7 +37,7 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
                 return invocation.proceed();
             }, false);
         } finally {
-           state.end(releaseAfterExecution);
+            state.end(releaseAfterExecution);
         }
 
     }

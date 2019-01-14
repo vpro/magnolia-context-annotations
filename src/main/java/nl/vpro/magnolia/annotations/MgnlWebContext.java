@@ -28,7 +28,7 @@ public @interface MgnlWebContext {
      *
      * A system context cannot really be released, but if this is true, the thread locals will be in the same state afterwards.
      */
-    boolean releaseAfterExecution() default true;
+    ReleaseAfterExecution releaseAfterExecution() default ReleaseAfterExecution.SMART;
 
 
     /**

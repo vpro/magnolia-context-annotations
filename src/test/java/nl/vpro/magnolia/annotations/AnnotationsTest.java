@@ -3,11 +3,13 @@ package nl.vpro.magnolia.annotations;
 import info.magnolia.context.ContextFactory;
 import info.magnolia.context.MgnlContext;
 import info.magnolia.context.SystemContext;
+import info.magnolia.context.ThreadDependentSystemContext;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
 import info.magnolia.test.mock.MockComponentProvider;
 import info.magnolia.test.mock.MockContext;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.junit.Before;
@@ -40,7 +42,11 @@ public class AnnotationsTest {
     public static class B {
         public String stuff() {
             log.info("{}", ContextFactory.getInstance().getSystemContext());
-            return "bb";
+            return ContextFactory.getInstance().getSystemContext().toString();
+        }
+        public String moreStuff() {
+            log.info("{}", ContextFactory.getInstance().getSystemContext());
+            return ContextFactory.getInstance().getSystemContext().toString();
         }
     }
 
@@ -51,6 +57,8 @@ public class AnnotationsTest {
             log.info("Path: {}", MgnlContext.getWebContext().getContextPath());
             return "cc";
         }
+
+
     }
 
     Injector injector;
@@ -58,7 +66,7 @@ public class AnnotationsTest {
     B b;
     C c;
 
-    SystemContext systemContext = new MockContext();
+    MyMockContext systemContext = new MyMockContext();
 
     @Before
     public void setup() {
@@ -82,14 +90,40 @@ public class AnnotationsTest {
         assertThat(a.stuff()).isEqualTo("aa");
     }
 
-     @Test
+    @Test
     public void testb() {
-        assertThat(b.stuff()).isEqualTo("bb");
+        assertThat(b.stuff()).isEqualTo("MyMockContext released:false threadreleased:false");
+        assertThat(b.moreStuff()).isEqualTo("MyMockContext released:false threadreleased:true");
+
     }
 
 
     @Test
     public void testc() {
         assertThat(c.stuff()).isEqualTo("cc");
+
+    }
+
+    static class MyMockContext extends MockContext implements ThreadDependentSystemContext {
+
+        @Getter
+        boolean released = false;
+
+        @Getter
+        boolean threadReleased = false;
+        @Override
+        public void release() {
+            super.release();
+            released = true;
+        }
+
+        @Override
+        public void releaseThread() {
+            threadReleased = true;
+
+        }
+        public String toString() {
+            return getClass().getSimpleName() + " released:" + released + " threadreleased:" + threadReleased;
+        }
     }
 }
