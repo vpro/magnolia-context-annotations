@@ -50,7 +50,7 @@ public class AnnotationsTest {
         }
     }
 
-    @MgnlWebContext(site = "vpronl", releaseAfterExecution = false)
+    @MgnlWebContext(site = "vpronl", releaseAfterExecution = ReleaseAfterExecution.FALSE)
     public static class C {
         public String stuff() {
             log.info("{}", ContextFactory.getInstance().getSystemContext());

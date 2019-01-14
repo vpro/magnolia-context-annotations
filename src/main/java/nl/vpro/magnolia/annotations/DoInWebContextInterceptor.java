@@ -1,20 +1,17 @@
 package nl.vpro.magnolia.annotations;
 
+import com.google.common.annotations.Beta;
 import info.magnolia.context.Context;
 import info.magnolia.context.MgnlContext;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.Callable;
-
+import nl.vpro.magnolia.SystemWebContext;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
-import com.google.common.annotations.Beta;
-
-import nl.vpro.magnolia.SystemWebContext;
+import java.util.concurrent.Callable;
 
 /**
  * @author Michiel Meeuwissen
@@ -32,7 +29,7 @@ public class DoInWebContextInterceptor implements MethodInterceptor {
         if (annotation == null) {
             annotation = invocation.getMethod().getDeclaringClass().getAnnotation(MgnlWebContext.class);
         }
-        boolean releaseAfterExecution = true;
+        ReleaseAfterExecution releaseAfterExecution = ReleaseAfterExecution.SMART;
         String site = "";
         if (annotation == null) {
             log.warn("Annotation not found on {}", invocation.getMethod());
