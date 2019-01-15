@@ -176,6 +176,7 @@
       <groupId>info.magnolia.site</groupId>
       <artifactId>magnolia-site</artifactId>
       <version>1.1.2</version>
+      <scope>optional</scope>
     </dependency>
   </dependencies>
 
