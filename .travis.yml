@@ -6,6 +6,6 @@ env:
 jdk:
 - oraclejdk8
 sudo: false
-script: mvn clean test deploy  -Pdeploy deploy --settings travis-settings.xml -DskipTests=false -Dgpg.skip=true  -B
+script: mvn --settings .travis-settings.xml  -Pdeploy  -DskipTests=false -B -Dgpg.skip=true clean test deploy
 
 
