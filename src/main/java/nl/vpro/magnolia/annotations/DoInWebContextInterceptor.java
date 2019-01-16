@@ -1,17 +1,19 @@
 package nl.vpro.magnolia.annotations;
 
-import com.google.common.annotations.Beta;
 import info.magnolia.context.Context;
 import info.magnolia.context.MgnlContext;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.magnolia.SystemWebContext;
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
 
 import java.util.concurrent.Callable;
+
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
+import com.google.common.annotations.Beta;
+
+import nl.vpro.magnolia.SystemWebContext;
 
 /**
  * @author Michiel Meeuwissen
@@ -21,7 +23,7 @@ import java.util.concurrent.Callable;
 public class DoInWebContextInterceptor implements MethodInterceptor {
 
 
-    static ThreadLocal<State> THREAD_STATE = ThreadLocal.withInitial(State::new);
+    static ThreadLocal<State<SystemWebContext>> THREAD_STATE = ThreadLocal.withInitial(State::new);
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -58,7 +60,7 @@ public class DoInWebContextInterceptor implements MethodInterceptor {
 
         try {
             MgnlContext.setInstance(new SystemWebContext(siteObject));
-            THREAD_STATE.get().context = MgnlContext.getInstance();
+            THREAD_STATE.get().context = (SystemWebContext) MgnlContext.getInstance();
             return callable.call();
         } finally {
             MgnlContext.setInstance(before);

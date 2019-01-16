@@ -1,6 +1,7 @@
 package nl.vpro.magnolia.annotations;
 
 import info.magnolia.context.MgnlContext;
+import info.magnolia.context.SystemContext;
 import lombok.extern.slf4j.Slf4j;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -14,7 +15,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class DoInSystemContextInterceptor implements MethodInterceptor {
 
 
-    static ThreadLocal<State> THREAD_STATE = ThreadLocal.withInitial(State::new);
+    static ThreadLocal<State<SystemContext>> THREAD_STATE = ThreadLocal.withInitial(State::new);
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -29,11 +30,11 @@ public class DoInSystemContextInterceptor implements MethodInterceptor {
             releaseAfterExecution = annotation.releaseAfterExecution();
         }
 
-        final State state = THREAD_STATE.get();
+        final State<SystemContext> state = THREAD_STATE.get();
         state.begin();
         try {
             return MgnlContext.doInSystemContext(() -> {
-                state.context = MgnlContext.getInstance();
+                state.context = (SystemContext) MgnlContext.getInstance();
                 return invocation.proceed();
             }, false);
         } finally {

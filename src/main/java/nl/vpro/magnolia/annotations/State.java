@@ -1,9 +1,6 @@
 package nl.vpro.magnolia.annotations;
 
-import info.magnolia.context.Context;
-import info.magnolia.context.MgnlContext;
-import info.magnolia.context.ThreadDependentSystemContext;
-import info.magnolia.context.WebContext;
+import info.magnolia.context.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,17 +13,23 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Getter
 @Slf4j
-class State {
+class State<T extends Context> {
     Context originalContext;
-    Context context;
-    AtomicInteger count = new AtomicInteger(0);
-    ;
+    T context;
+    final AtomicInteger count = new AtomicInteger(0);
+
+
 
     void release() {
-
         if (context != null) {
             try {
-                context.release();
+                 if (context instanceof SystemContext) {
+                     if (context instanceof ThreadDependentSystemContext) {
+                         ((ThreadDependentSystemContext) context).releaseThread();
+                     }
+                 } else {
+                     context.release();
+                 }
             } catch (Throwable t) {
                 log.error("While releasing {}: {}", context, t.getMessage(), t);
             }
@@ -36,14 +39,10 @@ class State {
          if (context != null) {
             try {
                 if (originalContext instanceof WebContext) {
-                    log.debug("Not releasin the context, since the original context is a web context, and we don't know if the thread is used any further");
+                    log.debug("Not releasing the context, since the original context is a web context, and we don't know if the thread is used any further");
                 } else {
                     if (!Objects.equals(context, originalContext)) {
-                        if (context instanceof ThreadDependentSystemContext) {
-                            ((ThreadDependentSystemContext) context).releaseThread();
-                        } else {
-                            context.release();
-                        }
+                        release();
                     } else {
                         log.debug("Not releasing context, while that would release the original context");
                     }
@@ -55,7 +54,6 @@ class State {
     }
 
     void begin() {
-
         if (count.get() == 0) {
             originalContext = MgnlContext.hasInstance() ? MgnlContext.getInstance() : null;
 
