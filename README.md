@@ -34,6 +34,6 @@ The annotation can also be used at class level, so you can make quite easily mar
 <dependency>
   <groupId>nl.vpro</groupId>
   <artifactId>magnolia-context-annotations</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 </dependency>
 ```
