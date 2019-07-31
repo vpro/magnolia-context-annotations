@@ -11,17 +11,16 @@ After installing this module in your magnolia deployment (taking the maven depen
 can do in stead of 
 ```java
 @Override
- public String stuff() {
-        return MgnlContext.doInSystemContext((MgnlContext.Op<String, Throwable>)
-            () -> actualStuff());
-    }
+public String stuff() {
+   return MgnlContext.doInSystemContext((MgnlContext.Op<String, Throwable>)
+        () -> actualStuff());
+}
 ```
 ```java
-    @Override
-    @MgnlSystemContext
-    public String stuff() {
-        return actualStuff();
-    }
+@Override
+@MgnlSystemContext
+public String stuff() {
+   return actualStuff();
 }
 ```
 
