@@ -1,9 +1,6 @@
 package nl.vpro.magnolia.annotations;
 
-import info.magnolia.context.ContextFactory;
-import info.magnolia.context.MgnlContext;
-import info.magnolia.context.SystemContext;
-import info.magnolia.context.ThreadDependentSystemContext;
+import info.magnolia.context.*;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
@@ -12,8 +9,9 @@ import info.magnolia.test.mock.MockContext;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -68,7 +66,7 @@ public class AnnotationsTest {
 
     MyMockContext systemContext = new MyMockContext();
 
-    @Before
+    @BeforeEach
     public void setup() {
         MockComponentProvider mocks = new MockComponentProvider();
         Components.setComponentProvider(mocks);
