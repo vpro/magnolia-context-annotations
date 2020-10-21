@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/vpro/magnolia-context-annotations.svg?)](https://travis-ci.org/vpro/magnolia-context-annotations)
+[![Build Status](https://travis-ci.com/vpro/magnolia-context-annotations.svg?)](https://travis-ci.com/vpro/magnolia-context-annotations)
 [![Maven Central](https://img.shields.io/maven-central/v/nl.vpro/magnolia-context-annotations.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:"nl.vpro"%20a:"magnolia-context-annotations")
 [![javadoc](http://www.javadoc.io/badge/nl.vpro/magnolia-context-annotations.svg?color=blue)](http://www.javadoc.io/doc/nl.vpro/magnolia-context-annotations)
 
