@@ -8,15 +8,12 @@ import info.magnolia.module.site.ExtendedAggregationState;
 import info.magnolia.module.site.Site;
 
 import java.io.Writer;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 
 import com.google.common.annotations.Beta;
 
@@ -31,7 +28,6 @@ import nl.vpro.magnolia.http.PseudoHttpServletResponse;
 @Beta
 public class SystemWebContext  extends JCRSessionPerThreadSystemContext implements WebContext {
 
-    private PageContext pageContext = null;
     private final HttpServletRequest servletRequest;
 
     private final HttpServletResponse servletResponse;
@@ -44,7 +40,6 @@ public class SystemWebContext  extends JCRSessionPerThreadSystemContext implemen
         state.setSite(site);
         this.servletRequest = new PseudoHttpServletRequest(state::getSite);
         this.servletResponse = new PseudoHttpServletResponse(state::getSite);
-
     }
 
     @Override
@@ -62,7 +57,6 @@ public class SystemWebContext  extends JCRSessionPerThreadSystemContext implemen
     @Override
     public AggregationState getAggregationState() {
         return state;
-
     }
 
     @Override
@@ -73,7 +67,6 @@ public class SystemWebContext  extends JCRSessionPerThreadSystemContext implemen
     @Override
     public MultipartForm getPostedForm() {
         return null;
-
     }
 
     @Override
@@ -90,48 +83,36 @@ public class SystemWebContext  extends JCRSessionPerThreadSystemContext implemen
             map.put(name, servletRequest.getParameter(name));
         }
         return map;
-
     }
 
     @Override
     public String getContextPath() {
         return "";
-
     }
 
     @Override
     public HttpServletRequest getRequest() {
         return servletRequest;
-
     }
 
     @Override
     public HttpServletResponse getResponse() {
         return servletResponse;
-
     }
 
     @Override
     public ServletContext getServletContext() {
         return servletContext;
-
     }
 
     @Override
     public void include(String path, Writer out) {
         throw new UnsupportedOperationException();
-
-    }
-
-    @Override
-    public PageContext getPageContext() {
-        return pageContext;
     }
 
     @Override
     public void push(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException();
-
     }
 
     @Override
@@ -142,12 +123,6 @@ public class SystemWebContext  extends JCRSessionPerThreadSystemContext implemen
     @Override
     public String[] getParameterValues(String name) {
         return new String[0];
-
     }
 
-    @Override
-    public void setPageContext(PageContext pageContext) {
-        this.pageContext = pageContext;
-
-    }
 }
