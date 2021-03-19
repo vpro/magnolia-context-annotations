@@ -1,0 +1,47 @@
+
+= magnolia-context-annotations
+
+image:https://github.com/vpro/magnolia-context-annotations/workflows/build/badge.svg?[Build Status,link=https://github.com/vpro/magnolia-context-annotations/actions?query=workflow%3Abuild]
+image:https://img.shields.io/maven-central/v/nl.vpro/magnolia-context-annotations.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:"nl.vpro"%20a:"magnolia-context-annotations"]
+image:http://www.javadoc.io/badge/nl.vpro/magnolia-context-annotations.svg?color=blue[javadoc,link=http://www.javadoc.io/doc/nl.vpro/magnolia-context-annotations]
+
+
+Provides java annotation for executing in system context
+
+== Usage
+
+After installing this module in your magnolia deployment (taking the maven dependency is enough), you
+can do in stead of
+
+[source,java]
+----
+@Override
+public String stuff() {
+   return MgnlContext.doInSystemContext((MgnlContext.Op<String, Throwable>)
+        () -> actualStuff());
+}
+----
+
+[source,java]
+----
+@Override
+@MgnlSystemContext
+public String stuff() {
+   return actualStuff();
+}
+----
+
+It's a bit like `javax.transaction.Transactional`
+
+The annotation can also be used at class level, so you can quite easily mark all methods of a complete utility class to be executed in system context.
+
+== Installation
+
+[source,xml]
+----
+<dependency>
+  <groupId>nl.vpro</groupId>
+  <artifactId>magnolia-context-annotations</artifactId>
+  <version>1.2.0</version>
+</dependency>
+----
