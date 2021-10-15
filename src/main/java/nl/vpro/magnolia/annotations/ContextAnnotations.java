@@ -36,4 +36,9 @@ public class ContextAnnotations extends AbstractModule  implements ComponentConf
     public void doWithConfiguration(ComponentProvider parentComponentProvider, ComponentProviderConfiguration configuration) {
         log.info("Installed {}", this);
     }
+
+    @Override
+    public String toString() {
+        return "Context annotations module";
+    }
 }
