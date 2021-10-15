@@ -2,7 +2,7 @@
 = magnolia-context-annotations
 
 image:https://github.com/vpro/magnolia-context-annotations/workflows/build/badge.svg?[Build Status,link=https://github.com/vpro/magnolia-context-annotations/actions?query=workflow%3Abuild]
-image:https://img.shields.io/maven-central/v/nl.vpro/magnolia-context-annotations.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:"nl.vpro"%20a:"magnolia-context-annotations"]
+image:https://img.shields.io/maven-central/v/nl.vpro/magnolia-context-annotations.svg?label=Maven%20Central[Maven Central,link=https://search.maven.org/search?q=g:nl.vpro%20a:magnolia-context-annotations]
 image:http://www.javadoc.io/badge/nl.vpro/magnolia-context-annotations.svg?color=blue[javadoc,link=http://www.javadoc.io/doc/nl.vpro/magnolia-context-annotations]
 
 
