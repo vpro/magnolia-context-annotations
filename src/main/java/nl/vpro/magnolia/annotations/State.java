@@ -18,8 +18,6 @@ class State<T extends Context> {
     T context;
     final AtomicInteger count = new AtomicInteger(0);
 
-
-
     void release() {
         if (context != null) {
             try {
@@ -35,6 +33,7 @@ class State<T extends Context> {
             }
         }
     }
+
     void smartRelease() {
          if (context != null) {
             try {
@@ -60,6 +59,7 @@ class State<T extends Context> {
         }
         count.incrementAndGet();
     }
+
     void end(ReleaseAfterExecution releaseAfterExecution) {
         int newCount = count.decrementAndGet();
         if (newCount == 0) {

@@ -2,11 +2,8 @@ package nl.vpro.magnolia.http;
 
 import info.magnolia.module.site.Site;
 
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Supplier;
 
 import javax.servlet.ServletOutputStream;
@@ -37,19 +34,16 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     @Override
     public void addCookie(Cookie cookie) {
         throw new UnsupportedOperationException();
-
     }
 
     @Override
     public boolean containsHeader(String name) {
         return false;
-
     }
 
     @Override
     public String encodeURL(String url) {
         throw new UnsupportedOperationException();
-
     }
 
     @Override
@@ -75,12 +69,12 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     }
 
     @Override
-    public void sendError(int sc) throws IOException {
+    public void sendError(int sc) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void sendRedirect(String location) throws IOException {
+    public void sendRedirect(String location) {
         throw new UnsupportedOperationException();
     }
 
@@ -124,25 +118,21 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     @Deprecated
     public void setStatus(int sc, String sm) {
         throw new UnsupportedOperationException();
-
     }
 
     @Override
     public int getStatus() {
         return 200;
-
     }
 
     @Override
     public String getHeader(String name) {
         return null;
-
     }
 
     @Override
     public Collection<String> getHeaders(String name) {
         return Collections.emptyList();
-
     }
 
     @Override
@@ -153,25 +143,21 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     @Override
     public String getCharacterEncoding() {
         return "UTF-8";
-
     }
 
     @Override
     public String getContentType() {
         return null;
-
     }
 
     @Override
-    public ServletOutputStream getOutputStream() throws IOException {
+    public ServletOutputStream getOutputStream() {
         throw new UnsupportedOperationException();
-
     }
 
     @Override
-    public PrintWriter getWriter() throws IOException {
+    public PrintWriter getWriter() {
         throw new UnsupportedOperationException();
-
     }
 
     @Override
@@ -202,12 +188,10 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     @Override
     public int getBufferSize() {
         return 0;
-
     }
 
     @Override
-    public void flushBuffer() throws IOException {
-
+    public void flushBuffer() {
 
     }
 
@@ -219,7 +203,6 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     @Override
     public boolean isCommitted() {
         return false;
-
     }
 
     @Override
@@ -235,6 +218,5 @@ public class PseudoHttpServletResponse implements HttpServletResponse {
     @Override
     public Locale getLocale() {
         return null;
-
     }
 }

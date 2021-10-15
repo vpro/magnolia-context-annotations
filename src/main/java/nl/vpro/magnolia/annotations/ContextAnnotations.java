@@ -24,18 +24,16 @@ public class ContextAnnotations extends AbstractModule  implements ComponentConf
             bindInterceptor(Matchers.annotatedWith(MgnlSystemContext.class), Matchers.not(Matchers.annotatedWith(MgnlSystemContext.class)), doInSystemContextInterceptor);
             bindInterceptor(Matchers.any(), Matchers.annotatedWith(MgnlSystemContext.class), doInSystemContextInterceptor);
         }
-          {
+        {
             DoInWebContextInterceptor doInWebContextInterceptor = new DoInWebContextInterceptor();
             requestInjection(doInWebContextInterceptor);
             bindInterceptor(Matchers.annotatedWith(MgnlWebContext.class), Matchers.not(Matchers.annotatedWith(MgnlWebContext.class)), doInWebContextInterceptor);
             bindInterceptor(Matchers.any(), Matchers.annotatedWith(MgnlWebContext.class), doInWebContextInterceptor);
         }
-
     }
 
     @Override
     public void doWithConfiguration(ComponentProvider parentComponentProvider, ComponentProviderConfiguration configuration) {
         log.info("Installed {}", this);
-
     }
 }

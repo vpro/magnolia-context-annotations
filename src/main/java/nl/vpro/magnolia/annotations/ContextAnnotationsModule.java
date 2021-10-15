@@ -26,6 +26,5 @@ public class ContextAnnotationsModule implements ModuleLifecycle {
     @Override
     public void stop(ModuleLifecycleContext moduleLifecycleContext) {
 
-
     }
 }
