@@ -42,7 +42,7 @@
   <properties>
     <jcr.version>2.0</jcr.version>
     <slf4j.version>1.7.25</slf4j.version>
-    <magnolia.version>6.2.12</magnolia.version>
+    <magnolia.version>6.2.13</magnolia.version>
     <mockito.version>4.0.0</mockito.version>
     <lombok.version>1.18.22</lombok.version>
     <assertj.version>3.21.0</assertj.version>
@@ -188,7 +188,7 @@
     <dependency>
       <groupId>info.magnolia.site</groupId>
       <artifactId>magnolia-site</artifactId>
-      <version>1.4.2</version>
+      <version>1.4.3</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
