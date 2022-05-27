@@ -41,11 +41,11 @@
 
   <properties>
     <jcr.version>2.0</jcr.version>
-    <slf4j.version>1.7.25</slf4j.version>
-    <magnolia.version>6.2.13</magnolia.version>
-    <mockito.version>4.0.0</mockito.version>
-    <lombok.version>1.18.22</lombok.version>
-    <assertj.version>3.21.0</assertj.version>
+    <slf4j.version>1.7.36</slf4j.version>
+    <magnolia.version>6.2.19</magnolia.version>
+    <mockito.version>4.5.1</mockito.version>
+    <lombok.version>1.18.24</lombok.version>
+    <assertj.version>3.22.0</assertj.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -141,7 +141,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.8.1</version>
+      <version>5.9.0-M1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -175,20 +175,21 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>4.0.4</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
-      <version>2.2</version>
+      <groupId>jakarta.servlet.jsp</groupId>
+      <artifactId>jakarta.servlet.jsp-api</artifactId>
+      <version>2.3.6</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>info.magnolia.site</groupId>
       <artifactId>magnolia-site</artifactId>
-      <version>1.4.3</version>
+      <version>1.4.4</version>
       <optional>true</optional>
     </dependency>
   </dependencies>
