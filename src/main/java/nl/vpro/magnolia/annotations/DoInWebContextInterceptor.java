@@ -1,7 +1,6 @@
 package nl.vpro.magnolia.annotations;
 
-import info.magnolia.context.Context;
-import info.magnolia.context.MgnlContext;
+import info.magnolia.context.*;
 import info.magnolia.module.site.Site;
 import info.magnolia.module.site.SiteManager;
 import info.magnolia.objectfactory.Components;
@@ -40,7 +39,7 @@ public class DoInWebContextInterceptor implements MethodInterceptor {
             site = annotation.site();
         }
 
-        final State state = THREAD_STATE.get();
+        final State<SystemWebContext> state = THREAD_STATE.get();
         state.begin();
 
         try {
