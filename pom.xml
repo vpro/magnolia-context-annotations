@@ -33,9 +33,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://git@github.com/vpro/magnolia-context-annotations.git</connection>
-    <developerConnection>scm:git:git@github.com:vpro/magnolia-context-annotations.git</developerConnection>
-    <url>https://github.com/vpro/magnolia-context-annotations</url>
+    <connection>scm:git:${project.scm.url}.git</connection>
+    <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
+    <url>https://github.com/vpro/magnolia-context-annotation</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -136,7 +136,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.9.0-M1</version>
+      <version>5.9.0-RC1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -199,7 +199,7 @@
           <plugin>
             <groupId>org.sonatype.plugins</groupId>
             <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.8</version>
+            <version>1.6.13</version>
             <extensions>true</extensions>
             <configuration>
               <serverId>vpro-ossrh</serverId>
@@ -208,9 +208,8 @@
             </configuration>
           </plugin>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
+            <version>3.0.1</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -222,9 +221,8 @@
             </executions>
           </plugin>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>3.0.1</version>
+            <version>3.2.1</version>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -235,9 +233,8 @@
             </executions>
           </plugin>
           <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>3.0.0</version>
+            <version>3.4.0</version>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
