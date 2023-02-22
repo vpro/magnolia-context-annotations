@@ -42,10 +42,10 @@
   <properties>
     <jcr.version>2.0</jcr.version>
     <slf4j.version>1.7.36</slf4j.version>
-    <magnolia.version>6.2.22</magnolia.version>
-    <mockito.version>4.7.0</mockito.version>
-    <lombok.version>1.18.24</lombok.version>
-    <assertj.version>3.23.1</assertj.version>
+    <magnolia.version>6.2.28</magnolia.version>
+    <mockito.version>5.1.1</mockito.version>
+    <lombok.version>1.18.26</lombok.version>
+    <assertj.version>3.24.2</assertj.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -130,7 +130,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.9.0</version>
+      <version>5.9.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
