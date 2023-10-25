@@ -42,6 +42,6 @@ The annotation can also be used at class level, so you can quite easily mark all
 <dependency>
   <groupId>nl.vpro</groupId>
   <artifactId>magnolia-context-annotations</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 </dependency>
 ----
