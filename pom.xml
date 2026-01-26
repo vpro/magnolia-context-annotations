@@ -45,7 +45,7 @@
     <magnolia.version>6.2.39</magnolia.version>
     <mockito.version>5.6.0</mockito.version>
     <lombok.version>1.18.30</lombok.version>
-    <assertj.version>3.24.2</assertj.version>
+    <assertj.version>3.27.7</assertj.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
